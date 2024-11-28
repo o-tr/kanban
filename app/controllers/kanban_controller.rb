@@ -1,5 +1,4 @@
 class KanbanController < ApplicationController
-  unloadable
   before_action :global_authorize
   #
   # Display kanban board
