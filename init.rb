@@ -15,5 +15,5 @@ Redmine::Plugin.register :kanban do
   # Enable permission for each project
   project_module :kanban do
     permission :display_menu_link, {:kanban => [:index]}
- end
+  end
 end
