@@ -529,10 +529,10 @@ class KanbanController < ApplicationController
   end
 
   def status_fields_to_dict(status_fields)
-    if status_fields.blank? then
-      return Constants::DEFAULT_STATUS_FIELD_VALUE_HASH
-    end
     result = {}
+    if status_fields.blank? then
+      return result
+    end
     status_fields.each {|id,chk|
       if chk == "1"
         result[id] = true
