@@ -2,7 +2,7 @@ Redmine::Plugin.register :kanban do
   name 'Kanban plugin'
   author 'ootr'
   description 'Kanban plugin for redmine 6.x original: https://github.com/happy-se-life/kanban'
-  version '0.0.13'
+  version '0.0.14'
   url 'https://github.com/o-tr/kanban'
   author_url 'https://github.com/o-tr'
 
