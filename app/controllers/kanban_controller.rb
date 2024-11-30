@@ -286,7 +286,7 @@ class KanbanController < ApplicationController
     session_hash["project_all"] = @project_all
     session_hash["version_id"] = @version_id
     session_hash["open_versions"] = @open_versions
-    session_hash["status_fields"] = @status_fields
+    session_hash["status_fields"] = status_fields_to_dict(@status_fields)
     session_hash["wip_max"] = @wip_max
     session_hash["card_size"] = @card_size
     session_hash["show_ancestors"] = @show_ancestors
@@ -366,7 +366,7 @@ class KanbanController < ApplicationController
     if !session_hash.blank? && params[:status_fields].blank?
       @status_fields = session_hash["status_fields"]
     else
-      @status_fields = params[:status_fields]
+      @status_fields = status_fields_to_dict(params[:status_fields])
     end
 
     # Max number of WIP issue
@@ -453,7 +453,7 @@ class KanbanController < ApplicationController
     @status_fields_array = []
     if !@status_fields.blank? then
       @status_fields.each {|id,chk|
-        if chk == "1"
+        if chk then
           @status_fields_array << id.to_i
         end
       }
@@ -528,4 +528,18 @@ class KanbanController < ApplicationController
     }
   end
 
+  def status_fields_to_dict(status_fields)
+    if status_fields.blank? then
+      return Constants::DEFAULT_STATUS_FIELD_VALUE_HASH
+    end
+    result = {}
+    status_fields.each {|id,chk|
+      if chk == "1"
+        result[id] = true
+      else
+        result[id] = false
+      end
+    }
+    return result
+  end
 end
